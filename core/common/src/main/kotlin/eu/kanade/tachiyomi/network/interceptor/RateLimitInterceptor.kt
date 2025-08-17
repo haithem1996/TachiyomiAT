@@ -13,6 +13,8 @@ import kotlin.time.Duration.Companion.seconds
 import kotlin.time.toDuration
 import kotlin.time.toDurationUnit
 
+import eu.kanade.domain.source.interactor.GetRateLimitingState
+
 /**
  * An OkHttp interceptor that handles rate limiting.
  *
@@ -50,8 +52,10 @@ fun OkHttpClient.Builder.rateLimit(
  * @param permits [Int]     Number of requests allowed within a period of units.
  * @param period [Duration] The limiting duration. Defaults to 1.seconds.
  */
-fun OkHttpClient.Builder.rateLimit(permits: Int, period: Duration = 1.seconds) =
-    this
+fun OkHttpClient.Builder.rateLimit(permits: Int, period: Duration = 1.seconds) = {
+    private val getRateLimitingState: GetRateLimitingState by injectLazy()
+    getRateLimitingState()
+}
 
 fun OkHttpClient.Builder.reallyApplyRateLimit(permits: Int, period: Duration = 1.seconds) =
     addInterceptor(RateLimitInterceptor(null, permits, period))

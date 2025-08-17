@@ -55,8 +55,7 @@ fun OkHttpClient.Builder.rateLimit(
  * @param period [Duration] The limiting duration. Defaults to 1.seconds.
  */
 fun OkHttpClient.Builder.rateLimit(permits: Int, period: Duration = 1.seconds) = {
-    private val getRateLimitingState: GetRateLimitingState by injectLazy()
-    getRateLimitingState()
+    this.getClass().getName()
 }
 
 fun OkHttpClient.Builder.reallyApplyRateLimit(permits: Int, period: Duration = 1.seconds) =

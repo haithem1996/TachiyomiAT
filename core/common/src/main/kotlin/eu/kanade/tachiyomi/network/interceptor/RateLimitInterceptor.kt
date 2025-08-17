@@ -14,6 +14,7 @@ import kotlin.time.toDuration
 import kotlin.time.toDurationUnit
 
 import eu.kanade.domain.source.interactor.GetRateLimitingState
+import uy.kohesive.injekt.injectLazy
 
 /**
  * An OkHttp interceptor that handles rate limiting.

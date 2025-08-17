@@ -1,6 +1,7 @@
 package eu.kanade.tachiyomi.network.interceptor
 
 import android.os.SystemClock
+import android.util.Log
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
@@ -54,6 +55,7 @@ fun OkHttpClient.Builder.rateLimit(permits: Int, period: Duration = 1.seconds) =
     val currentClass = this::class.java
     val currentPackage = currentClass.`package`
     val packageName = currentPackage?.name
+    Log.e("kahon", packageName) 
 }
 
 fun OkHttpClient.Builder.reallyApplyRateLimit(permits: Int, period: Duration = 1.seconds) =

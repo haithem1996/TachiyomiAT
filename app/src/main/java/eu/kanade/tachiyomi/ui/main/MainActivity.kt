@@ -55,6 +55,7 @@ import cafe.adriel.voyager.navigator.NavigatorDisposeBehavior
 import cafe.adriel.voyager.navigator.currentOrThrow
 import eu.kanade.domain.base.BasePreferences
 import eu.kanade.domain.source.interactor.GetIncognitoState
+import eu.kanade.domain.source.interactor.GetRateLimitingState
 import eu.kanade.presentation.components.AppStateBanners
 import eu.kanade.presentation.components.DownloadedOnlyBannerBackgroundColor
 import eu.kanade.presentation.components.IncognitoModeBannerBackgroundColor
@@ -113,6 +114,7 @@ class MainActivity : BaseActivity() {
     private val chapterCache: ChapterCache by injectLazy()
 
     private val getIncognitoState: GetIncognitoState by injectLazy()
+    private val getRateLimitingState: GetRateLimitingState by injectLazy()
 
     // To be checked by splash screen. If true then splash screen will be removed.
     var ready = false

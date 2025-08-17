@@ -26,6 +26,8 @@ class SourcePreferences(
 
     fun incognitoExtensions() = preferenceStore.getStringSet("incognito_extensions", emptySet())
 
+    fun rateLimitingExtensions() = preferenceStore.getStringSet("rate_limiting_extensions", emptySet())
+
     fun pinnedSources() = preferenceStore.getStringSet("pinned_catalogues", emptySet())
 
     fun lastUsedSource() = preferenceStore.getLong(

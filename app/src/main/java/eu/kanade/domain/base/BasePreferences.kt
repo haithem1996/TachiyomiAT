@@ -19,6 +19,8 @@ class BasePreferences(
 
     fun incognitoMode() = preferenceStore.getBoolean(Preference.appStateKey("incognito_mode"), false)
 
+    fun rateLimiting() = preferenceStore.getBoolean(Preference.appStateKey("rate_limiting"), false)
+
     fun extensionInstaller() = ExtensionInstallerPreference(context, preferenceStore)
 
     fun shownOnboardingFlow() = preferenceStore.getBoolean(Preference.appStateKey("onboarding_complete"), false)

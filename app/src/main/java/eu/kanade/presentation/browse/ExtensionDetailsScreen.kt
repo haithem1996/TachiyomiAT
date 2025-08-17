@@ -76,6 +76,7 @@ fun ExtensionDetailsScreen(
     onClickUninstall: () -> Unit,
     onClickSource: (sourceId: Long) -> Unit,
     onClickIncognito: (Boolean) -> Unit,
+    onClickRateLimiting: (Boolean) -> Unit,
 ) {
     val uriHandler = LocalUriHandler.current
     val url = remember(state.extension) {
@@ -145,10 +146,12 @@ fun ExtensionDetailsScreen(
             extension = state.extension,
             sources = state.sources,
             incognitoMode = state.isIncognito,
+            rateLimiting = state.isRateLimiting,
             onClickSourcePreferences = onClickSourcePreferences,
             onClickUninstall = onClickUninstall,
             onClickSource = onClickSource,
             onClickIncognito = onClickIncognito,
+            onClickRateLimiting = onClickRateLimiting,
         )
     }
 }
@@ -159,10 +162,12 @@ private fun ExtensionDetails(
     extension: Extension.Installed,
     sources: ImmutableList<ExtensionSourceItem>,
     incognitoMode: Boolean,
+    rateLimiting: Boolean,
     onClickSourcePreferences: (sourceId: Long) -> Unit,
     onClickUninstall: () -> Unit,
     onClickSource: (sourceId: Long) -> Unit,
     onClickIncognito: (Boolean) -> Unit,
+    onClickRateLimiting: (Boolean) -> Unit,
 ) {
     val context = LocalContext.current
     var showNsfwWarning by remember { mutableStateOf(false) }
@@ -180,6 +185,7 @@ private fun ExtensionDetails(
             DetailsHeader(
                 extension = extension,
                 extIncognitoMode = incognitoMode,
+                extRateLimiting = rateLimiting,
                 onClickUninstall = onClickUninstall,
                 onClickAppInfo = {
                     Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
@@ -192,6 +198,7 @@ private fun ExtensionDetails(
                     showNsfwWarning = true
                 },
                 onExtIncognitoChange = onClickIncognito,
+                onExtRateLimitingChange = onClickRateLimiting,
             )
         }
 
@@ -220,10 +227,12 @@ private fun ExtensionDetails(
 private fun DetailsHeader(
     extension: Extension,
     extIncognitoMode: Boolean,
+    extRateLimiting: Boolean,
     onClickAgeRating: () -> Unit,
     onClickUninstall: () -> Unit,
     onClickAppInfo: (() -> Unit)?,
     onExtIncognitoChange: (Boolean) -> Unit,
+    onExtRateLimitingChange: (Boolean) -> Unit,
 ) {
     val context = LocalContext.current
 
@@ -367,6 +376,24 @@ private fun DetailsHeader(
             },
         )
 
+        TextPreferenceWidget(
+            modifier = Modifier.padding(horizontal = MaterialTheme.padding.small),
+            title = stringResource(MR.strings.pref_rate_limiting),
+            subtitle = stringResource(MR.strings.pref_rate_limiting_extension_summary),
+            icon = ImageVector.vectorResource(R.drawable.ic_speed_24dp),
+            widget = {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Switch(
+                        checked = extRateLimiting,
+                        onCheckedChange = onExtRateLimitingChange,
+                        modifier = Modifier.padding(start = TrailingWidgetBuffer),
+                    )
+                }
+            },
+        )
+
         HorizontalDivider()
     }
 }
@@ -469,3 +496,4 @@ private fun NsfwWarningDialog(
         onDismissRequest = onClickConfirm,
     )
 }
+

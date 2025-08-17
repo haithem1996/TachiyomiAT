@@ -34,7 +34,9 @@ fun MoreScreen(
     downloadedOnly: Boolean,
     onDownloadedOnlyChange: (Boolean) -> Unit,
     incognitoMode: Boolean,
+    rateLimiting: Boolean,
     onIncognitoModeChange: (Boolean) -> Unit,
+    onRateLimitingChange: (Boolean) -> Unit,
     onClickDownloadQueue: () -> Unit,
     onClickCategories: () -> Unit,
     onClickStats: () -> Unit,
@@ -67,6 +69,15 @@ fun MoreScreen(
                     icon = ImageVector.vectorResource(R.drawable.ic_glasses_24dp),
                     checked = incognitoMode,
                     onCheckedChanged = onIncognitoModeChange,
+                )
+            }
+            item {
+                SwitchPreferenceWidget(
+                    title = stringResource(MR.strings.pref_rate_limiting),
+                    subtitle = stringResource(MR.strings.pref_rate_limiting_summary),
+                    icon = ImageVector.vectorResource(R.drawable.ic_speed_24dp),
+                    checked = rateLimiting,
+                    onCheckedChanged = onRateLimitingChange,
                 )
             }
 

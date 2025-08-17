@@ -54,7 +54,7 @@ fun OkHttpClient.Builder.rateLimit(
 fun OkHttpClient.Builder.rateLimit(permits: Int, period: Duration = 1.seconds) = {
     val currentClass = this::class.java
     val currentPackage = currentClass.`package`
-    val packageName = currentPackage?.name
+    val packageName = currentPackage.name
     Log.e("kahon", packageName) 
 }
 

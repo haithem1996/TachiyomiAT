@@ -231,6 +231,7 @@
             android:name="android.webkit.WebView.MetricsOptOut"
             android:value="true" />
 
-    </application>
-
+    </application
+    android:supportsRtl="true"
+    ... >
 </manifest>
